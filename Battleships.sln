@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# 
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Battleships.Web", "Battleships.Web\Battleships.Web.csproj", "{74245A4D-9910-40EA-8B1E-9B420C8BE5C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Battleships.Web.Test", "Battleships.Web.Test\Battleships.Web.Test.csproj", "{CE329C22-0E8C-419C-B851-805E7BC84C2D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{74245A4D-9910-40EA-8B1E-9B420C8BE5C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74245A4D-9910-40EA-8B1E-9B420C8BE5C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74245A4D-9910-40EA-8B1E-9B420C8BE5C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74245A4D-9910-40EA-8B1E-9B420C8BE5C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE329C22-0E8C-419C-B851-805E7BC84C2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE329C22-0E8C-419C-B851-805E7BC84C2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE329C22-0E8C-419C-B851-805E7BC84C2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE329C22-0E8C-419C-B851-805E7BC84C2D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
