@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Battleships</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">Battleships</a>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container" style="display: none" data-bind="visible: true">
+    <div class="row mt-3">
+      <div class="col-md-8 text-center">
+        <div data-bind="template: { name: 'bsTable', data: $data }"></div>
+      </div>
+
+      <div class="col-md-4 text-center">
+        <div class="row text-left">
+          <div class="legend-box e"></div>
+          <div class="ml-2 mt-1">Empty</div>
+        </div>
+        <div class="row">
+          <div class="legend-box d"></div>
+          <div class="ml-2 mt-1">Destroyed</div>
+        </div>
+        <div class="row">
+          <div class="legend-box t"></div>
+          <div class="ml-2 mt-1">Tested</div>
+        </div>
+        <button class="mt-5" data-bind="click: restartBoard">Restart</button>
+      </div>
+    </div>
+  </div>
+
+  <script id="bsTable" type="text/html">
+    <table class="table-bordered">
+      <tr>
+        <td></td>
+        <!-- ko foreach: header -->
+        <th><span data-bind="text: $data"></span></th>
+        <!-- /ko -->
+      </tr>
+      <!-- ko foreach: board -->
+      <tr>
+        <th data-bind="text: $index() + 1"></th>
+        <!-- ko foreach: $data -->
+        <td data-bind="class: $data, click: function(){ $root.cellClick($index(), $parentContext.$index()); }"></td>
+        <!-- /ko-->
+      </tr>
+      <!-- /ko -->
+  </table>
+  </script>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="http://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"></script>
+  <script src="index.js"></script>
+
+  <style>
+    table.table-bordered {
+      table-layout: fixed;
+    }
+
+    table.table-bordered tr th {
+      background: #eee;
+    }
+
+    table.table-bordered tr td,
+    table.table-bordered tr th,
+    .legend-box {
+      width: 2em;
+      max-width: 2em;
+      height: 2em;
+      max-height: 2em;
+      cursor: pointer;
+    }
+
+    .legend-box {
+      border: 1px solid #000;
+    }
+
+    table.table-bordered td.e,
+    .legend-box.e {
+      color: white;
+      background: white;
+    }
+
+    table.table-bordered td.d,
+    .legend-box.d {
+      color: red;
+      background: red;
+    }
+
+    table.table-bordered td.t,
+    .legend-box.t {
+      color: #bbb;
+      background: #bbb;
+      ;
+    }
+  </style>
+
+</body>
+
+</html>

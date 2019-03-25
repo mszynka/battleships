@@ -5,31 +5,37 @@ namespace Battleships.Web.Services
 {
     public interface IBoardCache
     {
-        bool HasBoard ();
-        Board Get ();
-        void Set (Board board);
+        bool HasBoard();
+        Board Get();
+        void Set(Board board);
+        void Reset();
     }
 
     public class BoardCache : IBoardCache
     {
         private Board board = null;
 
-        public bool HasBoard ()
+        public bool HasBoard()
         {
             return board != null;
         }
 
-        public Board Get ()
+        public Board Get()
         {
-            if (!HasBoard ())
-                throw new MissingBoardException ();
+            if (!HasBoard())
+                throw new MissingBoardException();
 
             return board;
         }
 
-        public void Set (Board board)
+        public void Set(Board board)
         {
             this.board = board;
+        }
+
+        public void Reset()
+        {
+            this.board = null;
         }
     }
 }

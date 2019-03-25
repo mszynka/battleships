@@ -6,48 +6,59 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Battleships.Web.Controllers
 {
-    [Route ("api/[controller]")]
+    [Route("api/[controller]")]
     public sealed class BattleshipController : Controller
     {
-        private readonly Lazy<IBoardGenerator> boardGenerator;
-        private readonly Lazy<IShipsGenerator> shipsGenerator;
+        private readonly IBoardGenerator boardGenerator;
+        private readonly IShipsGenerator shipsGenerator;
         private readonly IBoardCache boardCache;
+        private readonly IFieldToPointConverter fieldToPointConverter;
 
-        public BattleshipController (
-            Lazy<IBoardGenerator> boardGenerator,
-            Lazy<IShipsGenerator> shipsGenerator,
-            IBoardCache boardCache)
+        public BattleshipController(
+            IBoardGenerator boardGenerator,
+            IShipsGenerator shipsGenerator,
+            IBoardCache boardCache,
+            IFieldToPointConverter fieldToPointConverter)
         {
             this.boardGenerator = boardGenerator;
             this.shipsGenerator = shipsGenerator;
             this.boardCache = boardCache;
+            this.fieldToPointConverter = fieldToPointConverter;
         }
 
-        [HttpGet ("[action]")]
-        public IEnumerable<IEnumerable<char>> Board ()
+        [HttpGet("[action]")]
+        public IEnumerable<IEnumerable<char>> Board()
         {
-            if (boardCache.HasBoard ())
-                return boardCache.Get ().ToViewModel ();
+            if (boardCache.HasBoard())
+                return boardCache.Get().ToViewModel();
 
-            var board = boardGenerator.Value.GenerateBoard ();
-            var ships = shipsGenerator.Value.GenerateShips ();
+            var board = boardGenerator.GenerateBoard();
+            var ships = shipsGenerator.GenerateShips();
 
-            boardGenerator.Value.InsertShips (board, ships);
+            boardGenerator.InsertShips(board, ships);
 
-            boardCache.Set (board);
+            boardCache.Set(board);
 
-            return board.ToViewModel ();
+            return board.ToViewModel();
         }
 
-        public StrikeResult Strike (string field)
+        [HttpPost("[action]")]
+        public void Restart()
         {
-            return StrikeResult.Miss;
+            boardCache.Reset();
         }
-    }
 
-    public enum StrikeResult
-    {
-        Hit,
-        Miss
+        [HttpPost("[action]")]
+        public void Strike([FromQuery] string field)
+        {
+            if (!boardCache.HasBoard())
+                return;
+
+            var board = boardCache.Get();
+            var point = fieldToPointConverter.ConvertFrom(field);
+            board.Read(point).Visit();
+
+            boardCache.Set(board);
+        }
     }
 }

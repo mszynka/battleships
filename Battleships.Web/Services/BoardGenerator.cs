@@ -43,9 +43,11 @@ namespace Battleships.Web.Services
     //TODO: Refactor this to OOP/simpler design
     private Coordinates GeneratePointsFor(Board board, Ship ship)
     {
-      var direction = new Random().Next(0, 1) == 1;
-      var startX = new Random().Next(0, direction ? board.Limits.X : board.Limits.X - ship.Length);
-      var startY = new Random().Next(0, direction ? board.Limits.Y - ship.Length : board.Limits.Y);
+      var rand = new Random(Guid.NewGuid().GetHashCode());
+
+      var direction = rand.Next(0, 2) == 1;
+      var startX = rand.Next(0, direction ? board.Limits.X : board.Limits.X - ship.Length);
+      var startY = rand.Next(0, direction ? board.Limits.Y - ship.Length : board.Limits.Y);
 
       return new Coordinates(
         new Point(startX, startY),

@@ -16,7 +16,7 @@ namespace Battleships.Web.Models
             Limits = new Point(x, y);
 
             foreach (var _ in 0. To(y))
-                Add(Enumerable.Repeat(new EmptyField() as Field, x + 1).ToList());
+                Add(Enumerable.Range(0, x + 1).Select(i => new EmptyField() as Field).ToList());
         }
 
         public void InsertShip(Coordinates coord)

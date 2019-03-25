@@ -12,7 +12,7 @@ namespace Battleships.Web.Models
             this.symbol = symbol;
         }
 
-        internal virtual char ToViewModel () => symbol;
+        internal char ToViewModel () => symbol;
 
         internal abstract void Visit ();
 
@@ -29,7 +29,9 @@ namespace Battleships.Web.Models
 
     public sealed class EmptyField : Field
     {
-        public EmptyField () : base ('_') { }
+        public static char Symbol = 'e';
+
+        public EmptyField () : base (EmptyField.Symbol) { }
 
         internal override void Visit ()
         {
@@ -39,9 +41,7 @@ namespace Battleships.Web.Models
 
     public sealed class ShipField : Field
     {
-        public ShipField () : base ('O') { }
-
-        internal override char ToViewModel () => 'S';
+        public ShipField () : base (EmptyField.Symbol) { }
 
         internal override void Visit ()
         {
@@ -51,7 +51,7 @@ namespace Battleships.Web.Models
 
     public sealed class DestroyedShipField : Field
     {
-        public DestroyedShipField () : base ('#') { }
+        public DestroyedShipField () : base ('d') { }
 
         internal override void Visit ()
         { }
@@ -59,7 +59,7 @@ namespace Battleships.Web.Models
 
     public sealed class TestedField : Field
     {
-        public TestedField () : base ('^') { }
+        public TestedField () : base ('t') { }
 
         internal override void Visit ()
         { }
