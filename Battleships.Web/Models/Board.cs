@@ -7,7 +7,7 @@ using Battleships.Web.Models;
 
 namespace Battleships.Web.Models
 {
-    public class Board : List<List<Field>>
+    public sealed class Board : List<List<Field>>
     {
         public readonly Point Limits;
 
