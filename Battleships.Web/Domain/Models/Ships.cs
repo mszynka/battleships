@@ -1,8 +1,8 @@
-namespace Battleships.Web.Models
+namespace Battleships.Web.Domain.Models
 {
   public abstract class Ship
   {
-    public Ship (int length)
+    public Ship(int length)
     {
       Length = length;
     }
@@ -12,11 +12,11 @@ namespace Battleships.Web.Models
 
   public class Battleship : Ship
   {
-    public Battleship () : base (5) { }
+    public Battleship() : base(5) { }
   }
 
   public class Destroyer : Ship
   {
-    public Destroyer () : base (4) { }
+    public Destroyer() : base(4) { }
   }
 }

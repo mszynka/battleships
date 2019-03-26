@@ -1,26 +1,26 @@
 using System.Linq;
-using Battleships.Web.Models;
+using Battleships.Web.Domain.Models;
 using Battleships.Web.Services;
 using NUnit.Framework;
 
 namespace Battleships.Web.Test.Services
 {
-    [Category ("Unit")]
+    [Category("Unit")]
     public class ShipsGeneratorTests
     {
         private ShipsGenerator generator;
 
         [OneTimeSetUp]
-        public void OneTimeSetUp ()
+        public void OneTimeSetUp()
         {
-            this.generator = new ShipsGenerator ();
+            this.generator = new ShipsGenerator();
         }
 
         [Test]
-        public void It_has_correct_number_of_ships ()
+        public void It_has_correct_number_of_ships()
         {
             var ships = this.generator
-                .GenerateShips ()
+                .GenerateShips()
                 .ToArray();
 
             Assert.That(ships, Has.Exactly(3).Items);

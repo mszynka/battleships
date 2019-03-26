@@ -1,21 +1,21 @@
 using System.Collections.Generic;
-using Battleships.Web.Models;
+using Battleships.Web.Domain.Models;
 
 namespace Battleships.Web.Services
 {
     public interface IShipsGenerator
     {
-        IEnumerable<Ship> GenerateShips ();
+        IEnumerable<Ship> GenerateShips();
     }
 
     public class ShipsGenerator : IShipsGenerator
     {
-        public IEnumerable<Ship> GenerateShips ()
+        public IEnumerable<Ship> GenerateShips()
         {
-            yield return new Battleship ();
+            yield return new Battleship();
 
-            yield return new Destroyer ();
-            yield return new Destroyer ();
+            yield return new Destroyer();
+            yield return new Destroyer();
         }
     }
 }

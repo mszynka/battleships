@@ -1,16 +1,16 @@
 using System;
 
-namespace Battleships.Web.Models
+namespace Battleships.Web.Domain.Models
 {
     public struct Point
     {
-        public Point (int x, int y)
+        public Point(int x, int y)
         {
             if (x < 0)
-                throw new ArgumentException (nameof (x));
+                throw new ArgumentException(nameof(x));
 
             if (y < 0)
-                throw new ArgumentException (nameof (y));
+                throw new ArgumentException(nameof(y));
 
             X = x;
             Y = y;
@@ -23,7 +23,7 @@ namespace Battleships.Web.Models
 
     public struct Coordinates
     {
-        public Coordinates (Point start, Point end)
+        public Coordinates(Point start, Point end)
         {
             Start = start;
             End = end;

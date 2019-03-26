@@ -19,6 +19,8 @@ $(function () {
 
     self.board = ko.observableArray([]);
 
+    self.hasWon = ko.observable(false);
+
     self.restartBoard = function () {
       self.restartAction();
       self.getBoardAction();
@@ -36,12 +38,19 @@ $(function () {
         method: "GET",
         url: "/api/Battleship/Board"
       }).done(function (data) {
-        self.header(genCharArray(data.length));
-        self.board(data);
+        self.header(genCharArray(data.board.length));
+        self.board(data.board);
+        self.hasWon(data.hasWon);
       });
     }
 
     self.cellClick = function (x, y) {
+      if (self.hasWon()) {
+        self.restartAction();
+        self.getBoardAction();
+        return;
+      }
+
       var fieldName = '' + this.header()[x] + (y + 1);
       $.ajax({
         method: "POST",

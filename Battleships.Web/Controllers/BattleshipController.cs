@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Battleships.Web.Services;
+using Battleships.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Battleships.Web.Controllers
@@ -27,11 +28,18 @@ namespace Battleships.Web.Controllers
         }
 
         [HttpGet("[action]")]
-        public IEnumerable<IEnumerable<char>> Board()
+        public BoardViewModel Board()
         {
             if (boardCache.HasBoard())
-                return boardCache.Get().ToViewModel();
+                return new BoardViewModel(boardCache.Get());
 
+            var board = GenerateNewBoard();
+
+            return new BoardViewModel(board);
+        }
+
+        private Domain.Models.Board GenerateNewBoard()
+        {
             var board = boardGenerator.GenerateBoard();
             var ships = shipsGenerator.GenerateShips();
 
@@ -39,13 +47,13 @@ namespace Battleships.Web.Controllers
 
             boardCache.Set(board);
 
-            return board.ToViewModel();
+            return board;
         }
 
         [HttpPost("[action]")]
         public void Restart()
         {
-            boardCache.Reset();
+            GenerateNewBoard();
         }
 
         [HttpPost("[action]")]
@@ -56,7 +64,7 @@ namespace Battleships.Web.Controllers
 
             var board = boardCache.Get();
             var point = fieldToPointConverter.ConvertFrom(field);
-            board.Read(point).Visit();
+            board.Strike(point);
 
             boardCache.Set(board);
         }

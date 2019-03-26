@@ -1,11 +1,11 @@
 using System;
 using System.Linq;
+using Battleships.Web.Domain.Models;
 using Battleships.Web.Extensions;
-using Battleships.Web.Models;
 using Battleships.Web.Test.Utils;
 using NUnit.Framework;
 
-namespace Battleships.Web.Test.Models
+namespace Battleships.Web.Test.Domain.Models
 {
   [Category("Unit")]
   public class BoardTests

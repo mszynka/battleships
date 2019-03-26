@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Battleships.Web.Domain.Exceptions;
-using Battleships.Web.Models;
+using Battleships.Web.Domain.Models;
 
 namespace Battleships.Web.Services
 {
@@ -40,7 +40,6 @@ namespace Battleships.Web.Services
       return board;
     }
 
-    //TODO: Refactor this to OOP/simpler design
     private Coordinates GeneratePointsFor(Board board, Ship ship)
     {
       var rand = new Random(Guid.NewGuid().GetHashCode());
@@ -52,8 +51,8 @@ namespace Battleships.Web.Services
       return new Coordinates(
         new Point(startX, startY),
         new Point(
-          direction ? startX : startX + ship.Length,
-          direction ? startY + ship.Length : startY
+          direction ? startX : startX + ship.Length - 1,
+          direction ? startY + ship.Length - 1 : startY
         ));
     }
   }

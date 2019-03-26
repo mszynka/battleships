@@ -1,5 +1,5 @@
 using Battleships.Web.Domain.Exceptions;
-using Battleships.Web.Models;
+using Battleships.Web.Domain.Models;
 
 namespace Battleships.Web.Services
 {
@@ -8,7 +8,6 @@ namespace Battleships.Web.Services
         bool HasBoard();
         Board Get();
         void Set(Board board);
-        void Reset();
     }
 
     public class BoardCache : IBoardCache
@@ -31,11 +30,6 @@ namespace Battleships.Web.Services
         public void Set(Board board)
         {
             this.board = board;
-        }
-
-        public void Reset()
-        {
-            this.board = null;
         }
     }
 }

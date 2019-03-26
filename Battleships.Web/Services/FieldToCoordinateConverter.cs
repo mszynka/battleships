@@ -1,6 +1,6 @@
 using System;
 using System.Text.RegularExpressions;
-using Battleships.Web.Models;
+using Battleships.Web.Domain.Models;
 
 namespace Battleships.Web.Services
 {
