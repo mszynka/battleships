@@ -2,6 +2,8 @@
 
 Simple version of the game Battleships allowing a single human player to play a one-sided game of Battleships against ships placed by the computer.
 
+![Screenshot](screenshot.png)
+
 ## Build and run
 
 It is a simple .NET Core app therefore all you have to do to run it locally is to run build
