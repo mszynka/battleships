@@ -24,16 +24,13 @@ namespace Battleships.Web.Services
       {
         while (true)
         {
-          try
-          {
-            var coordinates = GeneratePointsFor(board, ship);
-            board.InsertShip(coordinates);
-            break;
-          }
-          catch (ShipInsertionException)
-          {
-            //NOTE: Retry on insertion failure
-          }
+          var coordinates = GeneratePointsFor(board, ship);
+
+          if (!board.CanInsert(coordinates))
+            continue;
+
+          board.InsertShip(coordinates);
+          break;
         }
       }
 

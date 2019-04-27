@@ -15,14 +15,14 @@ namespace Battleships.Web.Domain.Models
             Limits = new Point(x, y);
 
             foreach (var _ in 0. To(y))
-                Add(Enumerable.Range(0, x + 1).Select(i => new EmptyField() as Field).ToList());
+                Add(Enumerable.Range(0, x + 1)
+                    .Select(i => new EmptyField() as Field)
+                    .ToList()
+                );
         }
 
         public void InsertShip(Coordinates coord)
         {
-            if (!CanInsert(coord))
-                throw new ShipInsertionException();
-
             foreach (var y in coord.Start.Y.To(coord.End.Y))
             {
                 foreach (var x in coord.Start.X.To(coord.End.X))
@@ -37,12 +37,26 @@ namespace Battleships.Web.Domain.Models
             this [point.Y][point.X] = this [point.Y][point.X].Strike();
         }
 
-        private bool CanInsert(Coordinates coordinates)
+        public bool CanInsert(Coordinates coordinates)
         {
             if (!coordinates.IsInLimits(Limits))
                 return false;
 
-            return this.HasAllEmptyFieldsIn(coordinates);
+            foreach (var y in coordinates.Start.Y.To(coordinates.End.Y))
+            {
+                foreach (var x in coordinates.Start.X.To(coordinates.End.X))
+                {
+                    if (!(this [y][x] is EmptyField))
+                        return false;
+                }
+            }
+
+            return true;
+        }
+
+        public bool HasWon()
+        {
+            return !this.Any(y => y.Any(x => x is ShipField));
         }
     }
 }
